@@ -1,11 +1,60 @@
 import { Button } from "@/components/ui/button";
 import { Users, Target, Sparkles } from "lucide-react";
+import { useState, useEffect } from "react";
 
 interface CTASectionProps {
   onGetAccess: () => void;
 }
 
 const CTASection = ({ onGetAccess }: CTASectionProps) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    // Check for reduced motion preference
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  useEffect(() => {
+    if (isPaused || prefersReducedMotion) return;
+
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % 3);
+    }, 1200);
+
+    return () => clearInterval(interval);
+  }, [isPaused, prefersReducedMotion]);
+
+  const icons = [
+    { Icon: Users, size: "w-8 h-8", containerSize: "w-16 h-16", offset: "" },
+    { Icon: Target, size: "w-10 h-10", containerSize: "w-20 h-20", offset: "-mt-2" },
+    { Icon: Sparkles, size: "w-8 h-8", containerSize: "w-16 h-16", offset: "" },
+  ];
+
+  const getIconStyles = (index: number) => {
+    const isActive = activeIndex === index && !prefersReducedMotion;
+    
+    return {
+      container: `${icons[index].containerSize} rounded-2xl flex items-center justify-center border transition-all duration-500 ease-in-out ${icons[index].offset} ${
+        isActive
+          ? "bg-primary/20 border-primary/50 scale-105 shadow-[0_0_30px_rgba(45,212,191,0.3)]"
+          : "bg-secondary border-border scale-100 opacity-60"
+      }`,
+      icon: `${icons[index].size} transition-all duration-500 ease-in-out ${
+        isActive ? "text-primary" : "text-primary/50"
+      }`,
+    };
+  };
+
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden">
       {/* Background glow effect */}
@@ -17,16 +66,19 @@ const CTASection = ({ onGetAccess }: CTASectionProps) => {
       <div className="container mx-auto px-6 relative">
         <div className="max-w-4xl mx-auto">
           {/* Illustration Icons */}
-          <div className="flex justify-center gap-8 mb-12 animate-fade-in-up">
-            <div className="w-16 h-16 rounded-2xl bg-secondary flex items-center justify-center border border-border">
-              <Users className="w-8 h-8 text-primary" />
-            </div>
-            <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/30 -mt-2">
-              <Target className="w-10 h-10 text-primary" />
-            </div>
-            <div className="w-16 h-16 rounded-2xl bg-secondary flex items-center justify-center border border-border">
-              <Sparkles className="w-8 h-8 text-primary" />
-            </div>
+          <div 
+            className="flex justify-center gap-8 mb-12 animate-fade-in-up"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {icons.map((item, index) => {
+              const styles = getIconStyles(index);
+              return (
+                <div key={index} className={styles.container}>
+                  <item.Icon className={styles.icon} />
+                </div>
+              );
+            })}
           </div>
 
           {/* Content */}
