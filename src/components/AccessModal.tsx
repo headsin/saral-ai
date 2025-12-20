@@ -43,15 +43,8 @@ const AccessModal = ({ open, onOpenChange }: AccessModalProps) => {
         {!submitted ? (
           <div className="p-6 sm:p-8">
             {/* Header */}
-            <div className="flex items-center justify-between mb-6">
+            <div className="mb-6">
               <span className="text-lg font-bold text-foreground">Saral AI</span>
-              <button
-                onClick={() => handleClose(false)}
-                className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors"
-                aria-label="Close"
-              >
-                <X className="w-4 h-4" />
-              </button>
             </div>
 
             {/* Badge */}
@@ -116,15 +109,8 @@ const AccessModal = ({ open, onOpenChange }: AccessModalProps) => {
         ) : (
           <div className="p-6 sm:p-8 animate-fade-in">
             {/* Header */}
-            <div className="flex items-center justify-between mb-8">
+            <div className="mb-8">
               <span className="text-lg font-bold text-foreground">Saral AI</span>
-              <button
-                onClick={() => handleClose(false)}
-                className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors"
-                aria-label="Close"
-              >
-                <X className="w-4 h-4" />
-              </button>
             </div>
 
             {/* Success icon */}
