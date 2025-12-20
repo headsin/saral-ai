@@ -29,7 +29,7 @@ const CTASection = ({ onGetAccess }: CTASectionProps) => {
 
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % 3);
-    }, 1200);
+    }, 300);
 
     return () => clearInterval(interval);
   }, [isPaused, prefersReducedMotion]);
