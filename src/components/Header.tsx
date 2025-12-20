@@ -10,11 +10,11 @@ const Header = ({ onGetAccess }: HeaderProps) => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/30">
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center cursor-pointer">
+        <Link to="/" className="flex items-center cursor-pointer py-2">
           <img 
             src={SaralAILogo} 
             alt="Saral AI" 
-            className="h-[26px] md:h-[30px] w-auto"
+            className="h-[26px] sm:h-[30px] md:h-[34px] w-auto"
           />
         </Link>
         <Button
