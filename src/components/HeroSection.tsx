@@ -51,14 +51,18 @@ const HeroSection = ({ onGetAccess }: HeroSectionProps) => {
             className="relative lg:pl-12 animate-fade-in-up flex items-center justify-center" 
             style={{ animationDelay: "0.3s" }}
           >
-            <video
-              src={sphereVideo}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full max-w-md lg:max-w-lg mix-blend-screen"
-            />
+            <div className="relative">
+              {/* Glow effect behind video */}
+              <div className="absolute inset-0 animate-glow rounded-full blur-3xl bg-primary/20 scale-75" />
+              <video
+                src={sphereVideo}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full max-w-md lg:max-w-lg mix-blend-screen relative z-10 animate-float"
+              />
+            </div>
           </div>
         </div>
       </div>
