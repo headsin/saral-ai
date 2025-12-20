@@ -1,12 +1,24 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
+import QuoteSection from "@/components/QuoteSection";
+import AccessModal from "@/components/AccessModal";
 
 const Index = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleGetAccess = () => {
+    setModalOpen(true);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background dot-grid">
+      <Header onGetAccess={handleGetAccess} />
+      <main>
+        <HeroSection onGetAccess={handleGetAccess} />
+        <QuoteSection />
+      </main>
+      <AccessModal open={modalOpen} onOpenChange={setModalOpen} />
     </div>
   );
 };
