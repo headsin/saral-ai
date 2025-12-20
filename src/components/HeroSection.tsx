@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import GeometricIllustration from "./GeometricIllustration";
+import sphereVideo from "@/assets/sphere.mp4";
 
 interface HeroSectionProps {
   onGetAccess: () => void;
@@ -46,12 +46,19 @@ const HeroSection = ({ onGetAccess }: HeroSectionProps) => {
             </div>
           </div>
 
-          {/* Right illustration */}
+          {/* Right video */}
           <div 
-            className="relative lg:pl-12 animate-fade-in-up" 
+            className="relative lg:pl-12 animate-fade-in-up flex items-center justify-center" 
             style={{ animationDelay: "0.3s" }}
           >
-            <GeometricIllustration />
+            <video
+              src={sphereVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full max-w-md lg:max-w-lg rounded-2xl"
+            />
           </div>
         </div>
       </div>
