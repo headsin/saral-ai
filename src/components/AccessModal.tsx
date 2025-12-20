@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { X } from "lucide-react";
 
 interface AccessModalProps {
   open: boolean;
@@ -11,119 +11,126 @@ interface AccessModalProps {
 
 const AccessModal = ({ open, onOpenChange }: AccessModalProps) => {
   const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    role: "",
-  });
+  const [email, setEmail] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    if (email.trim()) {
+      setSubmitted(true);
+    }
   };
 
   const handleClose = (open: boolean) => {
     if (!open) {
       setTimeout(() => {
         setSubmitted(false);
-        setFormData({ name: "", email: "", company: "", role: "" });
+        setEmail("");
       }, 300);
     }
     onOpenChange(open);
   };
 
+  // Avatar images for social proof
+  const avatars = [
+    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+    "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&h=100&fit=crop&crop=face",
+  ];
+
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-md border-border/50 shadow-2xl">
+      <DialogContent className="sm:max-w-md p-0 gap-0 border-border/20 bg-card rounded-2xl shadow-2xl overflow-hidden">
         {!submitted ? (
-          <>
-            <DialogHeader className="space-y-3">
-              <DialogTitle className="text-2xl font-semibold tracking-tight text-center">
-                Step inside Saral AI
-              </DialogTitle>
-              <p className="text-muted-foreground text-center text-sm">
-                We are opening access in small circles. Share a few details and we will reach out.
+          <div className="p-6 sm:p-8">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-6">
+              <span className="text-lg font-bold text-foreground">Saral AI</span>
+              <button
+                onClick={() => handleClose(false)}
+                className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors"
+                aria-label="Close"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Badge */}
+            <div className="mb-6">
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-secondary text-muted-foreground">
+                Access opening in 2025
+              </span>
+            </div>
+
+            {/* Main content */}
+            <div className="space-y-3 mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
+                Get access to Saral AI
+              </h2>
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                An AI native sourcing and screening OS built for high signal hiring teams.
               </p>
-            </DialogHeader>
-            <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-              <div className="space-y-2">
-                <Label htmlFor="name" className="text-sm font-medium">
-                  Name
-                </Label>
-                <Input
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="h-11 bg-secondary/50 border-border/50 focus:border-accent focus:ring-accent/20"
-                  placeholder="Your name"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium">
-                  Work email
-                </Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="h-11 bg-secondary/50 border-border/50 focus:border-accent focus:ring-accent/20"
-                  placeholder="you@company.com"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="company" className="text-sm font-medium">
-                  Company
-                </Label>
-                <Input
-                  id="company"
-                  name="company"
-                  value={formData.company}
-                  onChange={handleChange}
-                  required
-                  className="h-11 bg-secondary/50 border-border/50 focus:border-accent focus:ring-accent/20"
-                  placeholder="Your company"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="role" className="text-sm font-medium">
-                  Role
-                </Label>
-                <Input
-                  id="role"
-                  name="role"
-                  value={formData.role}
-                  onChange={handleChange}
-                  required
-                  className="h-11 bg-secondary/50 border-border/50 focus:border-accent focus:ring-accent/20"
-                  placeholder="Your role"
-                />
-              </div>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="h-12 bg-secondary/50 border-border/50 rounded-xl focus:border-primary focus:ring-primary/20 placeholder:text-muted-foreground/60"
+                placeholder="Enter your work email"
+              />
               <Button
                 type="submit"
-                className="w-full h-12 mt-2 bg-primary text-primary-foreground hover:bg-primary/90 font-medium text-base rounded-full transition-all duration-200 hover:scale-[1.02]"
+                className="w-full h-12 bg-foreground text-background hover:bg-foreground/90 font-medium text-base rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-foreground/10"
               >
                 Request Access
               </Button>
             </form>
-          </>
+
+            {/* Social proof */}
+            <div className="flex items-center gap-3 mt-6 pt-6 border-t border-border/50">
+              <div className="flex -space-x-2">
+                {avatars.map((avatar, index) => (
+                  <img
+                    key={index}
+                    src={avatar}
+                    alt=""
+                    className="w-8 h-8 rounded-full border-2 border-card object-cover"
+                  />
+                ))}
+              </div>
+              <span className="text-xs sm:text-sm text-muted-foreground">
+                200+ recruiters and founders are already inside
+              </span>
+            </div>
+
+            {/* Footer */}
+            <div className="mt-8 pt-4 border-t border-border/30">
+              <p className="text-xs text-muted-foreground/60 text-center">
+                © 2025 Saral AI. All rights reserved.
+              </p>
+            </div>
+          </div>
         ) : (
-          <div className="py-8 text-center animate-fade-in">
-            <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-accent/10 flex items-center justify-center">
+          <div className="p-6 sm:p-8 animate-fade-in">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-8">
+              <span className="text-lg font-bold text-foreground">Saral AI</span>
+              <button
+                onClick={() => handleClose(false)}
+                className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors"
+                aria-label="Close"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Success icon */}
+            <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
               <svg
-                className="w-8 h-8 text-accent"
+                className="w-8 h-8 text-primary"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -136,9 +143,23 @@ const AccessModal = ({ open, onOpenChange }: AccessModalProps) => {
                 />
               </svg>
             </div>
-            <p className="text-foreground font-medium text-lg">
-              Got it. If Saral AI fits your hiring flow, you will hear from us.
-            </p>
+
+            {/* Confirmation message */}
+            <div className="text-center space-y-3">
+              <h2 className="text-2xl font-bold text-foreground">
+                You're on our radar.
+              </h2>
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                If Saral AI fits your hiring flow, we will reach out personally.
+              </p>
+            </div>
+
+            {/* Footer */}
+            <div className="mt-12 pt-4 border-t border-border/30">
+              <p className="text-xs text-muted-foreground/60 text-center">
+                © 2025 Saral AI. All rights reserved.
+              </p>
+            </div>
           </div>
         )}
       </DialogContent>

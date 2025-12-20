@@ -6,33 +6,33 @@
 
 @layer base {
   :root {
-    /* Dark theme as default */
-    --background: 220 25% 6%;
-    --foreground: 210 20% 95%;
+    /* Dark theme - matched to video background */
+    --background: 0 0% 3%;
+    --foreground: 0 0% 95%;
 
-    --card: 220 25% 9%;
-    --card-foreground: 210 20% 95%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 220 25% 9%;
-    --popover-foreground: 210 20% 95%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 95%;
 
     --primary: 165 80% 45%;
-    --primary-foreground: 220 25% 6%;
+    --primary-foreground: 0 0% 3%;
 
-    --secondary: 220 20% 14%;
-    --secondary-foreground: 210 20% 95%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 220 20% 16%;
-    --muted-foreground: 220 15% 60%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 55%;
 
     --accent: 165 80% 45%;
-    --accent-foreground: 220 25% 6%;
+    --accent-foreground: 0 0% 3%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 20% 18%;
-    --input: 220 20% 18%;
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
     --ring: 165 80% 45%;
 
     --radius: 0.75rem;
@@ -40,15 +40,15 @@
     /* Custom tokens */
     --gradient-accent: linear-gradient(135deg, hsl(165 80% 45%) 0%, hsl(180 70% 50%) 100%);
     --gradient-glow: radial-gradient(ellipse at center, hsl(165 80% 45% / 0.15) 0%, transparent 70%);
-    --dot-color: 220 20% 12%;
+    --dot-color: 0 0% 8%;
     
-    --sidebar-background: 220 25% 8%;
-    --sidebar-foreground: 210 20% 95%;
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 0 0% 95%;
     --sidebar-primary: 165 80% 45%;
-    --sidebar-primary-foreground: 220 25% 6%;
-    --sidebar-accent: 220 20% 14%;
-    --sidebar-accent-foreground: 210 20% 95%;
-    --sidebar-border: 220 20% 18%;
+    --sidebar-primary-foreground: 0 0% 3%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 16%;
     --sidebar-ring: 165 80% 45%;
   }
 }
