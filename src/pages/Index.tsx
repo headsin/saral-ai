@@ -2,6 +2,8 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import QuoteSection from "@/components/QuoteSection";
+import CTASection from "@/components/CTASection";
+import Footer from "@/components/Footer";
 import AccessModal from "@/components/AccessModal";
 
 const Index = () => {
@@ -17,7 +19,9 @@ const Index = () => {
       <main>
         <HeroSection onGetAccess={handleGetAccess} />
         <QuoteSection />
+        <CTASection onGetAccess={handleGetAccess} />
       </main>
+      <Footer />
       <AccessModal open={modalOpen} onOpenChange={setModalOpen} />
     </div>
   );
