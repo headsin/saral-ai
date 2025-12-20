@@ -57,7 +57,7 @@ const HeroSection = ({ onGetAccess }: HeroSectionProps) => {
               loop
               muted
               playsInline
-              className="w-full max-w-md lg:max-w-lg rounded-2xl"
+              className="w-full max-w-md lg:max-w-lg mix-blend-screen"
             />
           </div>
         </div>
