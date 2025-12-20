@@ -29,7 +29,7 @@ const CTASection = ({ onGetAccess }: CTASectionProps) => {
 
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % 3);
-    }, 300);
+    }, 800);
 
     return () => clearInterval(interval);
   }, [isPaused, prefersReducedMotion]);
@@ -44,14 +44,20 @@ const CTASection = ({ onGetAccess }: CTASectionProps) => {
     const isActive = activeIndex === index && !prefersReducedMotion;
     
     return {
-      container: `${icons[index].containerSize} rounded-2xl flex items-center justify-center border transition-all duration-500 ease-in-out ${icons[index].offset} ${
-        isActive
-          ? "bg-primary/20 border-primary/50 scale-105 shadow-[0_0_30px_rgba(45,212,191,0.3)]"
-          : "bg-secondary border-border scale-100 opacity-60"
-      }`,
-      icon: `${icons[index].size} transition-all duration-500 ease-in-out ${
-        isActive ? "text-primary" : "text-primary/50"
-      }`,
+      container: `${icons[index].containerSize} rounded-2xl flex items-center justify-center border ${icons[index].offset}`,
+      containerStyle: {
+        background: isActive ? "rgba(45, 212, 191, 0.15)" : "hsl(var(--secondary))",
+        borderColor: isActive ? "rgba(45, 212, 191, 0.4)" : "hsl(var(--border))",
+        transform: isActive ? "scale(1.05)" : "scale(1)",
+        opacity: isActive ? 1 : 0.5,
+        boxShadow: isActive ? "0 0 40px rgba(45, 212, 191, 0.25), 0 0 20px rgba(45, 212, 191, 0.15)" : "none",
+        transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+      } as React.CSSProperties,
+      icon: `${icons[index].size}`,
+      iconStyle: {
+        color: isActive ? "hsl(var(--primary))" : "hsl(var(--primary) / 0.4)",
+        transition: "color 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+      } as React.CSSProperties,
     };
   };
 
@@ -74,8 +80,12 @@ const CTASection = ({ onGetAccess }: CTASectionProps) => {
             {icons.map((item, index) => {
               const styles = getIconStyles(index);
               return (
-                <div key={index} className={styles.container}>
-                  <item.Icon className={styles.icon} />
+                <div 
+                  key={index} 
+                  className={styles.container}
+                  style={styles.containerStyle}
+                >
+                  <item.Icon className={styles.icon} style={styles.iconStyle} />
                 </div>
               );
             })}
