@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -7,7 +7,7 @@
 @layer base {
   :root {
     /* Dark theme - matched to video background */
-    --background: 0 0% 3%;
+    --background: #0a0a0a;
     --foreground: 0 0% 95%;
 
     --card: 0 0% 7%;
@@ -41,7 +41,7 @@
     --gradient-accent: linear-gradient(135deg, hsl(165 80% 45%) 0%, hsl(180 70% 50%) 100%);
     --gradient-glow: radial-gradient(ellipse at center, hsl(165 80% 45% / 0.15) 0%, transparent 70%);
     --dot-color: 0 0% 8%;
-    
+
     --sidebar-background: 0 0% 5%;
     --sidebar-foreground: 0 0% 95%;
     --sidebar-primary: 165 80% 45%;
@@ -127,7 +127,8 @@
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
