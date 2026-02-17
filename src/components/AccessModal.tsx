@@ -250,9 +250,11 @@ const AccessModal = ({ open, onOpenChange }: AccessModalProps) => {
             </div>
 
             <div className="text-center space-y-3">
-              <h2 className="text-2xl font-bold text-foreground">You're on our radar.</h2>
+              <h2 className="text-2xl font-bold text-foreground">
+                Thanks, {form.fullName.split(" ")[0]}, for signing up as an early user of Saral AI.
+              </h2>
               <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                Thanks {form.fullName.split(" ")[0]}! If Saral AI fits your hiring flow, we'll reach out personally.
+                We'll reach out to you directly with onboarding details soon.
               </p>
             </div>
 
